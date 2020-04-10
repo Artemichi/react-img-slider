@@ -1,0 +1,41 @@
+.carusel {
+  position: relative;
+  background-size: cover;
+  width: auto;
+  height: 100vh;
+  transition: 500ms ease;
+  overflow: hidden;
+}
+.control {
+  position: absolute;
+  top: 45%;
+  width: 4em;
+  height: 4em;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  outline: none;
+}
+.prev {
+  left: 3%;
+}
+.next {
+  right: 3%;
+}
+.indicatorsList {
+  position: absolute;
+  width: 15em;
+  bottom: 3%;
+  left: 50%;
+  margin-left: calc(-15em / 2);
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline-start: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}

@@ -29,8 +29,7 @@
   position: absolute;
   width: 15em;
   bottom: 3%;
-  left: 50%;
-  margin-left: calc(-15em / 2);
+  left: calc(50% - calc(15em / 2));
   list-style: none;
   display: flex;
   justify-content: space-between;

@@ -4,10 +4,10 @@ import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 import { Motion, spring } from 'react-motion'
 
-const Indicators = ({ imgs, index, dispatch }) => {
+const Indicators = ({ imgs, index, dispatch, show }) => {
 	return (
 		<React.Fragment>
-			<Motion defaultStyle={{ opacity: 0, y: 200 }} style={{ opacity: spring(1, { stiffness: 30 }), y: spring(0, { stiffness: 100 }) }}>
+			<Motion defaultStyle={{ opacity: 0, y: 200 }} style={{ opacity: spring(show ? 1 : 0, { stiffness: 30 }), y: spring(show ? 0 : 200, { stiffness: 100 }) }}>
 				{
 					(style) => (
 						<ul className={classes.indicatorsList} style={{ opacity: style.opacity, transform: `translateY(${style.y}px)` }}>

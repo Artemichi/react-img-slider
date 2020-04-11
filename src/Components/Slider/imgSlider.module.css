@@ -1,8 +1,8 @@
 .carusel {
   position: relative;
   background-size: cover;
-  width: 50rem;
-  height: 30rem;
+  width: 100vw;
+  height: 100vh;
   transition: 500ms ease;
   overflow: hidden;
 }
@@ -38,4 +38,16 @@
   padding-inline-start: 0;
   margin-block-start: 0;
   margin-block-end: 0;
+}
+.showToggle {
+  position: absolute;
+  right: 1%;
+  top: 2%;
+  background: transparent;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 0.5em;
+  text-transform: uppercase;
+  outline: none;
+  color: rgba(0, 0, 0, 0.54);
 }

@@ -1,8 +1,8 @@
 .carusel {
   position: relative;
   background-size: cover;
-  width: auto;
-  height: 100vh;
+  width: 50rem;
+  height: 30rem;
   transition: 500ms ease;
   overflow: hidden;
 }
@@ -11,7 +11,7 @@
   top: 45%;
   width: 4em;
   height: 4em;
-  border-radius: 10px;
+  border-radius: 50%;
   border: 1px solid rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: center;

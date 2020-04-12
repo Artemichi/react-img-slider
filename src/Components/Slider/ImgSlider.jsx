@@ -1,15 +1,35 @@
-import React, { useState, useReducer } from 'react'
+import React, { useState, useEffect, useReducer } from 'react'
 import classes from './imgSlider.module.css'
 import reducer from './imgSliderReducer'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
+import ToggleOnOutlinedIcon from '@material-ui/icons/ToggleOnOutlined'
+import ToggleOffOutlinedIcon from '@material-ui/icons/ToggleOffOutlined'
+import PlayArrowIcon from '@material-ui/icons/PlayArrow'
+import PauseCircleFilledIcon from '@material-ui/icons/PauseCircleFilled'
 import Indicators from './Indicators'
 import { Motion, spring } from 'react-motion'
 
 const ImgSlider = ({ images }) => {
   const [showControls, setShowControls] = useState(true)
 
+  const [autoPlay, setAutoPlay] = useState(false)
+
   const [idx, dispatch] = useReducer(reducer, 0)
+
+  useEffect(() => {
+    const play = autoPlay
+      ? setInterval(
+          () => dispatch({ type: 'NEXT_IMG', payload: images.length }),
+          5000
+        )
+      : null
+    if (autoPlay) setShowControls(false)
+    return () => {
+      clearInterval(play)
+      setShowControls(true)
+    }
+  }, [autoPlay, images.length])
 
   return (
     <React.Fragment>
@@ -38,7 +58,7 @@ const ImgSlider = ({ images }) => {
                   payload: { index: idx, last: images.length - 1 },
                 })
               }>
-              <ArrowBackIcon fontSize='large' color='action' />
+              <ArrowBackIcon fontSize='large' color='inherit' />
             </button>
           )}
         </Motion>
@@ -59,7 +79,7 @@ const ImgSlider = ({ images }) => {
               onClick={() =>
                 dispatch({ type: 'NEXT_IMG', payload: images.length })
               }>
-              <ArrowForwardIcon fontSize='large' color='action' />
+              <ArrowForwardIcon fontSize='large' color='inherit' />
             </button>
           )}
         </Motion>
@@ -70,12 +90,26 @@ const ImgSlider = ({ images }) => {
           {(style) => (
             <button
               style={{ opacity: style.opacity }}
-              className={classes.showToggle}
+              className={classes.showControlsButton}
               onClick={() => setShowControls((current) => !current)}>
-              {showControls ? 'скрыть' : 'показать'}
+              {showControls ? (
+                <ToggleOffOutlinedIcon color='inherit' fontSize='large' />
+              ) : (
+                <ToggleOnOutlinedIcon color='action' fontSize='large' />
+              )}
             </button>
           )}
         </Motion>
+        {/* autoPlay */}
+        <button
+          className={classes.autoPlayButton}
+          onClick={() => setAutoPlay((current) => !current)}>
+          {autoPlay ? (
+            <PauseCircleFilledIcon color='action' fontSize='large' />
+          ) : (
+            <PlayArrowIcon color='inherit' fontSize='large' />
+          )}
+        </button>
         {/* INDICATORS */}
         <Indicators
           imgs={images}

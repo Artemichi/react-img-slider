@@ -1,3 +1,7 @@
+:root {
+  --color: #ffb74d;
+}
+
 .carusel {
   position: relative;
   background-size: cover;
@@ -6,25 +10,30 @@
   transition: 500ms ease;
   overflow: hidden;
 }
+
 .control {
   position: absolute;
   top: 45%;
   width: 4em;
   height: 4em;
-  border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  border: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: transparent;
+  background: rgba(0, 0, 0, 0.1);
   outline: none;
+  color: var(--color);
 }
+
 .prev {
   left: 3%;
 }
+
 .next {
   right: 3%;
 }
+
 .indicatorsList {
   position: absolute;
   width: 15em;
@@ -37,16 +46,29 @@
   padding-inline-start: 0;
   margin-block-start: 0;
   margin-block-end: 0;
+  color: var(--color);
 }
-.showToggle {
+
+.showControlsButton {
   position: absolute;
-  right: 1%;
-  top: 2%;
-  background: transparent;
-  border-radius: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  padding: 0.5em;
-  text-transform: uppercase;
+  right: 0%;
+  bottom: 0%;
+  background: rgba(0, 0, 0, 0.1);
+  border-top-left-radius: 20px;
+  border: none;
+  padding: 0.8em 1em 0em 1.2em;
   outline: none;
-  color: rgba(0, 0, 0, 0.54);
+  color: var(--color);
+}
+
+.autoPlayButton {
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  background: rgba(0, 0, 0, 0.1);
+  border-bottom-left-radius: 20px;
+  border: none;
+  padding: 0.5em 1em;
+  outline: none;
+  color: var(--color);
 }

@@ -1,5 +1,7 @@
 :root {
-  --color: #ffb74d;
+  --color: #f44336;
+  --bg: rgba(0, 0, 0, 0.54);
+  --disabled: rgba(255, 255, 255, 0.44);
 }
 
 .carusel {
@@ -7,7 +9,6 @@
   background-size: cover;
   width: 100vw;
   height: 100vh;
-  transition: 500ms ease;
   overflow: hidden;
 }
 
@@ -17,13 +18,14 @@
   width: 4em;
   height: 4em;
   border-radius: 20px;
-  border: none;
+  border: 3px solid var(--color);
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--bg);
   outline: none;
   color: var(--color);
+  backdrop-filter: blur(5px);
 }
 
 .prev {
@@ -36,8 +38,9 @@
 
 .indicatorsList {
   position: absolute;
+  box-sizing: border-box;
   width: 20em;
-  bottom: 3%;
+  bottom: 6%;
   left: calc(50% - calc(20em / 2));
   list-style: none;
   display: flex;
@@ -46,29 +49,52 @@
   padding-inline-start: 0;
   margin-block-start: 0;
   margin-block-end: 0;
-  color: var(--color);
+  color: var(--disabled);
+  background: var(--bg);
+  border-radius: 20px;
+  border: 3px solid var(--color);
+  padding: 1em 1em 0.5em 1em;
+  backdrop-filter: blur(5px);
+}
+
+/* SETTINGS */
+.settings {
+  position: absolute;
+  right: 0%;
+  top: 0%;
+  background: var(--bg);
+  border-bottom: 3px solid var(--color);
+  border-left: 3px solid var(--color);
+  border-bottom-left-radius: 20px;
+  backdrop-filter: blur(5px);
 }
 
 .showControlsButton {
-  position: absolute;
-  left: 0%;
-  top: 0%;
-  background: rgba(0, 0, 0, 0.1);
-  border-bottom-right-radius: 20px;
   border: none;
-  padding: 0.5em 1em 0em 1em;
+  padding: 0.5em 1em;
   outline: none;
-  color: var(--color);
+  background: none;
+  color: var(--disabled);
 }
 
 .autoPlayButton {
-  position: absolute;
-  top: 0%;
-  right: 0%;
-  background: rgba(0, 0, 0, 0.1);
-  border-bottom-left-radius: 20px;
   border: none;
-  padding: 0.23em 1em;
+  padding: 0.5em 1em;
   outline: none;
+  background: none;
+  color: var(--disabled);
+}
+
+.likes {
+  position: absolute;
+  left: 1%;
+  top: 2%;
+}
+
+.downloadLink {
+  border: none;
+  padding: 0.5em 1em;
+  outline: none;
+  background: none;
   color: var(--color);
 }

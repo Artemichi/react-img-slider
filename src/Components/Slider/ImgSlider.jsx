@@ -7,10 +7,14 @@ import ToggleOnOutlinedIcon from '@material-ui/icons/ToggleOnOutlined'
 import ToggleOffOutlinedIcon from '@material-ui/icons/ToggleOffOutlined'
 import PlayArrowIcon from '@material-ui/icons/PlayArrow'
 import PauseCircleFilledIcon from '@material-ui/icons/PauseCircleFilled'
+import CloudDownloadOutlinedIcon from '@material-ui/icons/CloudDownloadOutlined'
+import FavoriteIcon from '@material-ui/icons/Favorite'
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
+import Badge from '@material-ui/core/Badge'
 import Indicators from './Indicators'
 import { Motion, spring } from 'react-motion'
 
-const ImgSlider = ({ images }) => {
+const ImgSlider = ({ images, links, likes }) => {
   const [showControls, setShowControls] = useState(true)
 
   const [autoPlay, setAutoPlay] = useState(false)
@@ -26,7 +30,7 @@ const ImgSlider = ({ images }) => {
       : null
     if (autoPlay) setShowControls(false)
     return () => {
-      console.log('AUTO_PLAY: ', !autoPlay)
+      // console.log('AUTO_PLAY: ', !autoPlay)
       clearInterval(play)
       setShowControls(true)
     }
@@ -39,12 +43,12 @@ const ImgSlider = ({ images }) => {
         className={classes.carusel}
         style={{ backgroundImage: `url(${images[idx]})` }}>
         {/* CONTROLS */}
-        {/* prev */}
+        {/* PREV IMG */}
         <Motion
           defaultStyle={{ opacity: 0, x: -200 }}
           style={{
-            opacity: spring(showControls ? 1 : 0, { stiffness: 30 }),
-            x: spring(showControls ? 0 : -200, { stiffness: 100 }),
+            opacity: spring(showControls ? 1 : 0),
+            x: spring(showControls ? 0 : -200),
           }}>
           {(style) => (
             <button
@@ -63,12 +67,12 @@ const ImgSlider = ({ images }) => {
             </button>
           )}
         </Motion>
-        {/* next */}
+        {/* NEXT IMG */}
         <Motion
           defaultStyle={{ opacity: 0, x: 200 }}
           style={{
-            opacity: spring(showControls ? 1 : 0, { stiffness: 30 }),
-            x: spring(showControls ? 0 : 200, { stiffness: 100 }),
+            opacity: spring(showControls ? 1 : 0),
+            x: spring(showControls ? 0 : 200),
           }}>
           {(style) => (
             <button
@@ -84,33 +88,49 @@ const ImgSlider = ({ images }) => {
             </button>
           )}
         </Motion>
-        {/* toggle */}
-        <Motion
-          defaultStyle={{ opacity: 0 }}
-          style={{ opacity: spring(1, { stiffness: 50 }) }}>
-          {(style) => (
-            <button
-              style={{ opacity: style.opacity }}
-              className={classes.showControlsButton}
-              onClick={() => setShowControls((current) => !current)}>
-              {showControls ? (
-                <ToggleOnOutlinedIcon color='inherit' fontSize='large' />
-              ) : (
-                <ToggleOffOutlinedIcon color='action' fontSize='large' />
-              )}
-            </button>
-          )}
-        </Motion>
-        {/* autoPlay */}
-        <button
-          className={classes.autoPlayButton}
-          onClick={() => setAutoPlay((current) => !current)}>
-          {autoPlay ? (
-            <PauseCircleFilledIcon color='action' fontSize='large' />
-          ) : (
-            <PlayArrowIcon color='inherit' fontSize='large' />
-          )}
-        </button>
+        {/* SETTINGS */}
+        <div className={classes.settings}>
+          {/* DOWNLOAD LINK */}
+          <button
+            className={classes.downloadLink}
+            onClick={() => {
+              const win = window.open(links[idx])
+              win.focus()
+            }}>
+            <CloudDownloadOutlinedIcon color='inherit' fontSize='large' />
+          </button>
+          {/* toggle controls */}
+          <button
+            className={classes.showControlsButton}
+            onClick={() => setShowControls((current) => !current)}>
+            {showControls ? (
+              <ToggleOnOutlinedIcon color='error' fontSize='large' />
+            ) : (
+              <ToggleOffOutlinedIcon color='inherit' fontSize='large' />
+            )}
+          </button>
+          {/* AUTOPLAY BUTTON */}
+          <button
+            className={classes.autoPlayButton}
+            onClick={() => setAutoPlay((current) => !current)}>
+            {autoPlay ? (
+              <PauseCircleFilledIcon color='inherit' fontSize='large' />
+            ) : (
+              <PlayArrowIcon color='error' fontSize='large' />
+            )}
+          </button>
+        </div>
+
+        {/* LIKES */}
+        <div className={classes.likes}>
+          <Badge badgeContent={likes[idx]} max={100} color='error'>
+            {likes[idx] === 0 ? (
+              <FavoriteBorderIcon color='error' fontSize='large' />
+            ) : (
+              <FavoriteIcon color='error' fontSize='large' />
+            )}
+          </Badge>
+        </div>
         {/* INDICATORS */}
         <Indicators
           imgs={images}

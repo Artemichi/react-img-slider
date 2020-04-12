@@ -10,8 +10,8 @@ const Indicators = ({ imgs, index, dispatch, show }) => {
       <Motion
         defaultStyle={{ opacity: 0, y: 200 }}
         style={{
-          opacity: spring(show ? 1 : 0, { stiffness: 30 }),
-          y: spring(show ? 0 : 200, { stiffness: 100 }),
+          opacity: spring(show ? 1 : 0),
+          y: spring(show ? 0 : 200),
         }}>
         {(style) => (
           <ul
@@ -26,9 +26,12 @@ const Indicators = ({ imgs, index, dispatch, show }) => {
                   key={i}
                   onClick={() => dispatch({ type: 'JUMP_TO', payload: i })}>
                   {i === index ? (
-                    <RadioButtonCheckedIcon color='inherit' fontSize='small' />
+                    <RadioButtonCheckedIcon color='error' fontSize='small' />
                   ) : (
-                    <RadioButtonUncheckedIcon color='action' fontSize='small' />
+                    <RadioButtonUncheckedIcon
+                      color='inherit'
+                      fontSize='small'
+                    />
                   )}
                 </li>
               )

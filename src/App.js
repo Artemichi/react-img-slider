@@ -9,12 +9,21 @@ function App() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    getImages(
-      `https://api.unsplash.com/photos/random?client_id=${process.env.REACT_APP_UNSPLASH_KEY}&count=5&content_filter=high&orientation=landscape`
-    ).then((imagesPaths) => {
-      setImages(imagesPaths)
-      setLoading(false)
-    })
+    const BASE_URL = 'https://api.unsplash.com/'
+    const RANDOM_PHOTO = 'photos/random'
+    const KEY = process.env.REACT_APP_API_KEY
+    const PARAMS = Object.values({
+      count: '&count=8',
+      filter: '&content_filter=high',
+      orientation: '&orientation=landscape',
+    }).join('')
+
+    getImages(`${BASE_URL}${RANDOM_PHOTO}?client_id=${KEY}${PARAMS}`).then(
+      (imagesPaths) => {
+        setImages(imagesPaths)
+        setLoading(false)
+      }
+    )
   }, [])
 
   return (

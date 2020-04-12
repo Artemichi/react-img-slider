@@ -21,11 +21,12 @@ const ImgSlider = ({ images }) => {
     const play = autoPlay
       ? setInterval(
           () => dispatch({ type: 'NEXT_IMG', payload: images.length }),
-          5000
+          3000
         )
       : null
     if (autoPlay) setShowControls(false)
     return () => {
+      console.log('AUTO_PLAY: ', !autoPlay)
       clearInterval(play)
       setShowControls(true)
     }
@@ -93,9 +94,9 @@ const ImgSlider = ({ images }) => {
               className={classes.showControlsButton}
               onClick={() => setShowControls((current) => !current)}>
               {showControls ? (
-                <ToggleOffOutlinedIcon color='inherit' fontSize='large' />
+                <ToggleOnOutlinedIcon color='inherit' fontSize='large' />
               ) : (
-                <ToggleOnOutlinedIcon color='action' fontSize='large' />
+                <ToggleOffOutlinedIcon color='action' fontSize='large' />
               )}
             </button>
           )}

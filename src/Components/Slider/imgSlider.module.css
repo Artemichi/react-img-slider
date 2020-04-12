@@ -36,9 +36,9 @@
 
 .indicatorsList {
   position: absolute;
-  width: 15em;
+  width: 20em;
   bottom: 3%;
-  left: calc(50% - calc(15em / 2));
+  left: calc(50% - calc(20em / 2));
   list-style: none;
   display: flex;
   justify-content: space-between;
@@ -51,12 +51,12 @@
 
 .showControlsButton {
   position: absolute;
-  right: 0%;
-  bottom: 0%;
+  left: 0%;
+  top: 0%;
   background: rgba(0, 0, 0, 0.1);
-  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   border: none;
-  padding: 0.8em 1em 0em 1.2em;
+  padding: 0.5em 1em 0em 1em;
   outline: none;
   color: var(--color);
 }
@@ -68,7 +68,7 @@
   background: rgba(0, 0, 0, 0.1);
   border-bottom-left-radius: 20px;
   border: none;
-  padding: 0.5em 1em;
+  padding: 0.23em 1em;
   outline: none;
   color: var(--color);
 }

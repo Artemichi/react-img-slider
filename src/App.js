@@ -16,7 +16,7 @@ function App() {
     const RANDOM_PHOTO = 'photos/random'
     const KEY = process.env.REACT_APP_API_KEY
     const PARAMS = Object.values({
-      count: '&count=10',
+      count: '&count=8',
       filter: '&content_filter=high',
       orientation: '&orientation=landscape',
     }).join('')

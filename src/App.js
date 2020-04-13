@@ -37,15 +37,6 @@ function App() {
         const blob = await res.blob()
         const path = URL.createObjectURL(blob)
         const img = new Image()
-        // img.onload = (e) =>
-        //   console.log(
-        //     'loading image:',
-        //     img.complete,
-        //     '-> resolution:',
-        //     img.naturalWidth,
-        //     'x',
-        //     img.naturalHeight
-        //   )
         img.src = path
         return path
       })

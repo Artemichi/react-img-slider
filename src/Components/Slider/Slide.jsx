@@ -20,7 +20,7 @@ const Slide = ({ idx, images, dispatch, autoPlay }) => {
     },
     preventDefaultTouchmoveEvent: true,
     trackTouch: true,
-    trackMouse: true,
+    trackMouse: false,
   })
 
   const transitions = useTransition(images[idx], idx, {

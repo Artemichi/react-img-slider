@@ -11,18 +11,25 @@ import PauseCircleFilledIcon from '@material-ui/icons/PauseCircleFilled'
 import CloudDownloadOutlinedIcon from '@material-ui/icons/CloudDownloadOutlined'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined'
+import Popover from '@material-ui/core/Popover'
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
 import IconButton from '@material-ui/core/IconButton'
 import Badge from '@material-ui/core/Badge'
+import Typography from '@material-ui/core/Typography'
+import Divider from '@material-ui/core/Divider'
 import Indicators from './Indicators'
 import Slide from './Slide'
 
-const ImgSlider = ({ images, links, likes }) => {
+const ImgSlider = ({ images, links, likes, info }) => {
   const [showControls, setShowControls] = useState(() =>
     window.innerWidth > 767 ? true : false
   )
   const [autoPlay, setAutoPlay] = useState(false)
   const [idx, dispatch] = useReducer(reducer, 0)
   const controlsFade = useSpring({ opacity: showControls ? 1 : 0 })
+  const [anchorEl, setAnchorEl] = React.useState(null)
 
   useEffect(() => {
     const play = autoPlay
@@ -37,6 +44,9 @@ const ImgSlider = ({ images, links, likes }) => {
       setShowControls(() => (window.innerWidth > 767 ? true : false))
     }
   }, [autoPlay, images.length])
+
+  const open = Boolean(anchorEl)
+  const id = open ? 'popover' : undefined
 
   return (
     <React.Fragment>
@@ -77,6 +87,54 @@ const ImgSlider = ({ images, links, likes }) => {
 
       {/* SETTINGS */}
       <div className={classes.settings}>
+        <IconButton
+          aria-describedby={id}
+          aria-label='info'
+          color='inherit'
+          onClick={(event) => setAnchorEl(event.currentTarget)}
+        >
+          <InfoOutlinedIcon fontSize='large' />
+        </IconButton>
+
+        <Popover
+          id={id}
+          open={open}
+          anchorEl={anchorEl}
+          onClose={() => setAnchorEl(null)}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+        >
+          <Card className={classes.root}>
+            <CardContent>
+              <Typography color='textSecondary'>Автор</Typography>
+              <Typography variant='h6' component='h2'>
+                {info[idx].user}
+              </Typography>
+              <Divider />
+
+              {info[idx].description ? (
+                <>
+                  <Typography color='textSecondary'>Описание</Typography>
+                  <Typography variant='h6' component='h2'>
+                    {info[idx].description}
+                  </Typography>
+                  <Divider />
+                </>
+              ) : null}
+
+              <Typography variant='body2' component='p'>
+                {info[idx].location}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Popover>
+
         <IconButton
           aria-label='download'
           color='inherit'

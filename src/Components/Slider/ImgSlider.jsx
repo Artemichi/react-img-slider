@@ -26,7 +26,6 @@ const ImgSlider = ({ images, links, likes, info }) => {
   const [showControls, setShowControls] = useState(() =>
     window.innerWidth > 767 ? true : false
   )
-  // check
   const [autoPlay, setAutoPlay] = useState(false)
   const [idx, dispatch] = useReducer(reducer, 0)
   const controlsFade = useSpring({ opacity: showControls ? 1 : 0 })
@@ -37,7 +36,7 @@ const ImgSlider = ({ images, links, likes, info }) => {
     const play = autoPlay
       ? setInterval(
           () => dispatch({ type: 'NEXT_IMG', payload: images.length }),
-          4000
+          3000
         )
       : null
     if (autoPlay) setShowControls(false)
@@ -159,7 +158,7 @@ const ImgSlider = ({ images, links, likes, info }) => {
           {showControls ? (
             <ToggleOnSharpIcon fontSize='large' />
           ) : (
-            <ToggleOffSharpIcon fontSize='large' />
+            <ToggleOffSharpIcon color='action' fontSize='large' />
           )}
         </IconButton>
         <IconButton
@@ -168,7 +167,7 @@ const ImgSlider = ({ images, links, likes, info }) => {
           onClick={() => setAutoPlay((current) => !current)}
         >
           {autoPlay ? (
-            <PauseCircleFilledIcon fontSize='large' />
+            <PauseCircleFilledIcon color='action' fontSize='large' />
           ) : (
             <PlayCircleFilledSharpIcon fontSize='large' />
           )}

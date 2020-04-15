@@ -1,5 +1,8 @@
 :root {
   --color: #f44336;
+  --bg: rgba(255, 255, 255, 0.7);
+  --br: 20px;
+  --blur: 8px;
 }
 
 .carusel {
@@ -14,6 +17,9 @@
   top: 45%;
   outline: none;
   color: var(--color);
+  background-color: var(--bg);
+  backdrop-filter: blur(var(--blur));
+  border-radius: var(--br);
 }
 
 .prev {
@@ -34,8 +40,9 @@
   align-items: center;
   color: var(--color);
   box-sizing: border-box;
-  border-radius: 20px;
-  backdrop-filter: blur(10px) opacity(50%);
+  border-radius: var(--br);
+  background-color: var(--bg);
+  backdrop-filter: blur(var(--blur));
   padding: 1em 0.5em 0.6em 0.5em;
 }
 
@@ -45,8 +52,9 @@
   right: 0%;
   top: 0%;
   color: var(--color);
-  border-bottom-left-radius: 20px;
-  backdrop-filter: blur(10px) opacity(50%);
+  border-bottom-left-radius: var(--br);
+  backdrop-filter: blur(var(--blur));
+  background-color: var(--bg);
 }
 
 .likes {

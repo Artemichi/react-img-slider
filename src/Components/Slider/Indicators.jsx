@@ -24,7 +24,7 @@ const Indicators = ({ imgs, index, dispatch, setDir }) => {
             {i === index ? (
               <RadioButtonCheckedIcon color='inherit' />
             ) : (
-              <RadioButtonUncheckedIcon color='inherit' />
+              <RadioButtonUncheckedIcon color='action' />
             )}
           </div>
         ))}

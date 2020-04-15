@@ -4,14 +4,14 @@ import reducer from './imgSliderReducer'
 import { useSpring, animated } from 'react-spring'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
-import ToggleOnOutlinedIcon from '@material-ui/icons/ToggleOnOutlined'
-import ToggleOffOutlinedIcon from '@material-ui/icons/ToggleOffOutlined'
-import PlayArrowIcon from '@material-ui/icons/PlayArrow'
+import ToggleOffSharpIcon from '@material-ui/icons/ToggleOffSharp'
+import ToggleOnSharpIcon from '@material-ui/icons/ToggleOnSharp'
+import PlayCircleFilledSharpIcon from '@material-ui/icons/PlayCircleFilledSharp'
 import PauseCircleFilledIcon from '@material-ui/icons/PauseCircleFilled'
-import CloudDownloadOutlinedIcon from '@material-ui/icons/CloudDownloadOutlined'
 import FavoriteIcon from '@material-ui/icons/Favorite'
+import SaveSharpIcon from '@material-ui/icons/SaveSharp'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined'
+import InfoSharpIcon from '@material-ui/icons/InfoSharp'
 import Popover from '@material-ui/core/Popover'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
@@ -30,6 +30,7 @@ const ImgSlider = ({ images, links, likes, info }) => {
   const [idx, dispatch] = useReducer(reducer, 0)
   const controlsFade = useSpring({ opacity: showControls ? 1 : 0 })
   const [anchorEl, setAnchorEl] = React.useState(null)
+  const [dir, setDir] = useState('')
 
   useEffect(() => {
     const play = autoPlay
@@ -55,6 +56,8 @@ const ImgSlider = ({ images, links, likes, info }) => {
         images={images}
         dispatch={dispatch}
         autoPlay={autoPlay}
+        dir={dir}
+        setDir={setDir}
       />
       {/* CONTROLS */}
       <animated.div style={controlsFade}>
@@ -62,12 +65,13 @@ const ImgSlider = ({ images, links, likes, info }) => {
           <IconButton
             aria-label='prev'
             color='inherit'
-            onClick={() =>
+            onClick={() => {
+              setDir('right')
               dispatch({
                 type: 'PREV_IMG',
                 payload: { index: idx, last: images.length - 1 },
               })
-            }
+            }}
           >
             <ArrowBackIcon fontSize='large' />
           </IconButton>
@@ -76,9 +80,10 @@ const ImgSlider = ({ images, links, likes, info }) => {
           <IconButton
             aria-label='next'
             color='inherit'
-            onClick={() =>
+            onClick={() => {
+              setDir('left')
               dispatch({ type: 'NEXT_IMG', payload: images.length })
-            }
+            }}
           >
             <ArrowForwardIcon fontSize='large' />
           </IconButton>
@@ -93,7 +98,7 @@ const ImgSlider = ({ images, links, likes, info }) => {
           color='inherit'
           onClick={(event) => setAnchorEl(event.currentTarget)}
         >
-          <InfoOutlinedIcon fontSize='large' />
+          <InfoSharpIcon fontSize='large' />
         </IconButton>
 
         <Popover
@@ -143,7 +148,7 @@ const ImgSlider = ({ images, links, likes, info }) => {
             win.focus()
           }}
         >
-          <CloudDownloadOutlinedIcon fontSize='large' />
+          <SaveSharpIcon fontSize='large' />
         </IconButton>
         <IconButton
           aria-label='controls'
@@ -151,9 +156,9 @@ const ImgSlider = ({ images, links, likes, info }) => {
           onClick={() => setShowControls((current) => !current)}
         >
           {showControls ? (
-            <ToggleOnOutlinedIcon fontSize='large' />
+            <ToggleOnSharpIcon fontSize='large' />
           ) : (
-            <ToggleOffOutlinedIcon color='action' fontSize='large' />
+            <ToggleOffSharpIcon fontSize='large' />
           )}
         </IconButton>
         <IconButton
@@ -162,9 +167,9 @@ const ImgSlider = ({ images, links, likes, info }) => {
           onClick={() => setAutoPlay((current) => !current)}
         >
           {autoPlay ? (
-            <PauseCircleFilledIcon color='action' fontSize='large' />
+            <PauseCircleFilledIcon fontSize='large' />
           ) : (
-            <PlayArrowIcon fontSize='large' />
+            <PlayCircleFilledSharpIcon fontSize='large' />
           )}
         </IconButton>
       </div>
@@ -181,7 +186,12 @@ const ImgSlider = ({ images, links, likes, info }) => {
       </div>
 
       {/* INDICATORS */}
-      <Indicators imgs={images} index={idx} dispatch={dispatch} />
+      <Indicators
+        imgs={images}
+        index={idx}
+        dispatch={dispatch}
+        setDir={setDir}
+      />
     </React.Fragment>
   )
 }

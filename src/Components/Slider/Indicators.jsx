@@ -4,7 +4,7 @@ import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked'
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked'
 import { animated, useSpring } from 'react-spring'
 
-const Indicators = ({ imgs, index, dispatch }) => {
+const Indicators = ({ imgs, index, dispatch, setDir }) => {
   const swingUP = useSpring({
     from: { transform: `translateY(200px)` },
     transform: `translateY(0px)`,
@@ -16,11 +16,15 @@ const Indicators = ({ imgs, index, dispatch }) => {
         {imgs.map((e, i) => (
           <div
             key={i}
-            onClick={() => dispatch({ type: 'JUMP_TO', payload: i })}>
+            onClick={() => {
+              setDir(() => (index > i ? 'right' : 'left'))
+              dispatch({ type: 'JUMP_TO', payload: i })
+            }}
+          >
             {i === index ? (
               <RadioButtonCheckedIcon color='inherit' />
             ) : (
-              <RadioButtonUncheckedIcon color='action' />
+              <RadioButtonUncheckedIcon color='inherit' />
             )}
           </div>
         ))}

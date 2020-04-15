@@ -1,18 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import classes from './imgSlider.module.css'
 import { useSwipeable } from 'react-swipeable'
-import { useTransition, animated, config } from 'react-spring'
+import { useTransition, animated } from 'react-spring'
 
-const Slide = ({ idx, images, dispatch, autoPlay }) => {
-  const [state, setState] = useState('')
-
+const Slide = ({ idx, images, dispatch, autoPlay, dir, setDir }) => {
   const handlers = useSwipeable({
     onSwipedLeft: () => {
-      setState('left')
+      setDir('left')
       dispatch({ type: 'NEXT_IMG', payload: images.length })
     },
     onSwipedRight: () => {
-      setState('right')
+      setDir('right')
       dispatch({
         type: 'PREV_IMG',
         payload: { index: idx, last: images.length - 1 },
@@ -20,14 +18,13 @@ const Slide = ({ idx, images, dispatch, autoPlay }) => {
     },
     preventDefaultTouchmoveEvent: true,
     trackTouch: true,
-    trackMouse: false,
+    trackMouse: true,
   })
 
   const transitions = useTransition(images[idx], idx, {
     from: { opacity: 0, transform: 'scale(1)' },
     enter: { opacity: 1, transform: 'scale(1)' },
     leave: { opacity: 0, transform: 'scale(0.7)' },
-    config: config.molasses,
   })
 
   return transitions.map(({ item, props, key }) => (
@@ -38,7 +35,7 @@ const Slide = ({ idx, images, dispatch, autoPlay }) => {
       style={{
         ...props,
         backgroundImage: `url(${item})`,
-        transformOrigin: autoPlay ? 'left' : state,
+        transformOrigin: autoPlay ? 'left' : dir,
       }}
     ></animated.div>
   ))

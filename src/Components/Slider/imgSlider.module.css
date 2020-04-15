@@ -30,9 +30,13 @@
   bottom: 5%;
   left: calc(50% - calc(20em / 2));
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   color: var(--color);
+  box-sizing: border-box;
+  border-radius: 20px;
+  backdrop-filter: blur(10px) opacity(50%);
+  padding: 1em 0.5em 0.6em 0.5em;
 }
 
 /* SETTINGS */
@@ -41,6 +45,8 @@
   right: 0%;
   top: 0%;
   color: var(--color);
+  border-bottom-left-radius: 20px;
+  backdrop-filter: blur(10px) opacity(50%);
 }
 
 .likes {

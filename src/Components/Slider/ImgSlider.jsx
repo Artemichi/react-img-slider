@@ -26,6 +26,7 @@ const ImgSlider = ({ images, links, likes, info }) => {
   const [showControls, setShowControls] = useState(() =>
     window.innerWidth > 767 ? true : false
   )
+  // check
   const [autoPlay, setAutoPlay] = useState(false)
   const [idx, dispatch] = useReducer(reducer, 0)
   const controlsFade = useSpring({ opacity: showControls ? 1 : 0 })

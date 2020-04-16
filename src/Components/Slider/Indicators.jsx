@@ -33,4 +33,4 @@ const Indicators = ({ imgs, index, dispatch, setDir }) => {
   )
 }
 
-export default Indicators
+export default React.memo(Indicators)

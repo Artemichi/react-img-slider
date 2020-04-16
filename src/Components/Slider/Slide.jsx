@@ -41,4 +41,4 @@ const Slide = ({ idx, images, dispatch, autoPlay, dir, setDir }) => {
   ))
 }
 
-export default Slide
+export default React.memo(Slide)

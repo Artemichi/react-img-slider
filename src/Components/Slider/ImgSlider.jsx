@@ -76,6 +76,7 @@ const ImgSlider = ({ images, links, likes, info }) => {
             <ArrowBackIcon fontSize='large' />
           </IconButton>
         </div>
+
         <div className={`${classes.control} ${classes.next}`}>
           <IconButton
             aria-label='next'
@@ -92,6 +93,16 @@ const ImgSlider = ({ images, links, likes, info }) => {
 
       {/* SETTINGS */}
       <div className={classes.settings}>
+        <IconButton aria-label='likes'>
+          <Badge badgeContent={likes[idx]} max={100} color='primary'>
+            {likes[idx] === 0 ? (
+              <FavoriteBorderIcon color='error' fontSize='large' />
+            ) : (
+              <FavoriteIcon color='error' fontSize='large' />
+            )}
+          </Badge>
+        </IconButton>
+
         <IconButton
           aria-describedby={id}
           aria-label='info'
@@ -161,6 +172,7 @@ const ImgSlider = ({ images, links, likes, info }) => {
             <ToggleOffSharpIcon color='action' fontSize='large' />
           )}
         </IconButton>
+
         <IconButton
           aria-label='play'
           color='inherit'
@@ -174,17 +186,6 @@ const ImgSlider = ({ images, links, likes, info }) => {
         </IconButton>
       </div>
 
-      {/* LIKES */}
-      <div className={classes.likes}>
-        <Badge badgeContent={likes[idx]} max={100} color='primary'>
-          {likes[idx] === 0 ? (
-            <FavoriteBorderIcon color='error' fontSize='large' />
-          ) : (
-            <FavoriteIcon color='error' fontSize='large' />
-          )}
-        </Badge>
-      </div>
-
       {/* INDICATORS */}
       <Indicators
         imgs={images}
@@ -196,4 +197,4 @@ const ImgSlider = ({ images, links, likes, info }) => {
   )
 }
 
-export default ImgSlider
+export default React.memo(ImgSlider)

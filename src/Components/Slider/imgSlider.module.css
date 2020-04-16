@@ -1,8 +1,8 @@
 :root {
   --color: #f44336;
   --bg: rgba(255, 255, 255, 0.7);
-  --br: 20px;
-  --blur: 8px;
+  --br: 2em;
+  --blur: 0.5em;
 }
 
 .carusel {
@@ -22,6 +22,20 @@
   border-radius: var(--br);
 }
 
+.control:hover {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0px var(--color);
+  }
+
+  70% {
+    box-shadow: 0 0 0 20px rgba(244, 67, 54, 0);
+  }
+}
+
 .prev {
   left: 2%;
 }
@@ -39,14 +53,12 @@
   justify-content: space-around;
   align-items: center;
   color: var(--color);
-  box-sizing: border-box;
   border-radius: var(--br);
   background-color: var(--bg);
   backdrop-filter: blur(var(--blur));
-  padding: 1em 0.5em 0.6em 0.5em;
+  padding: 1em 0.6em 0.6em 0.6em;
 }
 
-/* SETTINGS */
 .settings {
   position: absolute;
   right: 0%;
@@ -55,10 +67,4 @@
   border-bottom-left-radius: var(--br);
   backdrop-filter: blur(var(--blur));
   background-color: var(--bg);
-}
-
-.likes {
-  position: absolute;
-  left: 1%;
-  top: 2%;
 }
